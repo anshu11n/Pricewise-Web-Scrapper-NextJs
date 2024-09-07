@@ -58,6 +58,10 @@ export async function scrapeAmazonProduct(url: string) {
 
     const description = extractDescription($)
 
+    const category = $('td.a-size-base.prodDetAttrValue').last().text().trim();
+    console.log(category);
+    
+
     // Construct data object with scraped information
     const data = {
       url,
@@ -68,7 +72,7 @@ export async function scrapeAmazonProduct(url: string) {
       originalPrice: Number(originalPrice) || Number(currentPrice),
       priceHistory: [],
       discountRate: Number(discountRate),
-      category: 'category',
+      category,
       reviewsCount:100,
       stars: 4.5,
       isOutOfStock: outOfStock,
